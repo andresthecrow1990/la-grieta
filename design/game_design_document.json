@@ -1,0 +1,71 @@
+{
+  "title": "La grieta - El viaje del destino",
+  "hook": "Tragedia arcade epica de venganza",
+  "game_overview": "Odisea arcade de Mouler en 2026 por AndyCrow Games. Incluye prologo cinematico, modo turista facil, modo devil hardcore, sombras espectrales, jefes brutales y soporte bilingue en ingles y espanol.",
+  "artstyle": "pixelated",
+  "genre": "platformer",
+  "winning_condition": "Reach the ancient storm beacon at the end of the ruins before the 300-second timer expires.",
+  "losing_condition": "Agotar las 15 vidas arcade y la reencarnaci\u00f3n celestial de 3 vidas divinas del Fragmento 3.",
+  "player_mode": "single_player",
+  "supported_orientations": [
+    "landscape"
+  ],
+  "input_methods": [
+    "touch",
+    "keyboard",
+    "dpad"
+  ],
+  "score_options": {
+    "score_type": "points",
+    "score_order": "higher_is_better"
+  },
+  "low_end_device_support": true,
+  "mobile_playable": true,
+  "tv_playable": true,
+  "language": [
+    "en-US",
+    "es-ES"
+  ],
+  "content_descriptors": [],
+  "controls": [
+    {
+      "input": "Arrow Left / Right or Key A / D",
+      "action": "Move Voltlynx left and right with calibrated momentum."
+    },
+    {
+      "input": "Arrow Down or Key S",
+      "action": "Crouch / Duck down (halves hitbox height so incoming turret projectiles fly overhead)."
+    },
+    {
+      "input": "Spacebar or Key K (Button A)",
+      "action": "Jump with variable height based on hold duration; high enemy bounce."
+    },
+    {
+      "input": "Shift or Key J (Button B)",
+      "action": "Dash / Ground tackle sprint when holding direction; melee swipe when stationary."
+    },
+    {
+      "input": "Key L or Key U (Button Y)",
+      "action": "Thunder Shot / Fire bouncing spark or chain lightning arc depending on active power-up."
+    },
+    {
+      "input": "FPS Selector (Menu & Pause)",
+      "action": "Switch between 60 FPS and 30 FPS capped modes for lower hardware load or balanced speed."
+    },
+    {
+      "input": "Virtual D-Pad (Mobile Touch)",
+      "action": "Ergonomic left thumb virtual directional pad for responsive motion and crouching."
+    },
+    {
+      "input": "Virtual Action Buttons (Mobile Touch)",
+      "action": "Right thumb natural arc action buttons for Jump, Dash, and Thunder attacks."
+    }
+  ],
+  "sections": [
+    {
+      "title": "Pr\u00f3logo & Tragedia Orgriniana",
+      "content": "La aldea de los Orgrinianos viv\u00eda en paz hasta que la grieta desgarr\u00f3 el cielo. Ghotur y 4 comandantes sombr\u00edos quebraron el sagrado N\u00facleo en 5 partes. Mouler hereda la Perla de Energ\u00eda de su padre ca\u00eddo y jura venganza.",
+      "summary": "1996 AndyCrow Games: La invasi\u00f3n de Ghotur, la ca\u00edda del padre de Mouler y la divisi\u00f3n del N\u00facleo Celestial en 5 fragmentos."
+    }
+  ]
+}

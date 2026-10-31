@@ -1,0 +1,83 @@
+{
+  "schema": [
+    {
+      "name": "playerSpeed",
+      "type": "number",
+      "label": "Movement Speed",
+      "default": 220,
+      "min": 160,
+      "max": 320,
+      "step": 10
+    },
+    {
+      "name": "dashSpeed",
+      "type": "number",
+      "label": "Dash Sprint Speed",
+      "default": 360,
+      "min": 260,
+      "max": 480,
+      "step": 10
+    },
+    {
+      "name": "jumpForce",
+      "type": "number",
+      "label": "Jump Force",
+      "default": 560,
+      "min": 400,
+      "max": 720,
+      "step": 10
+    },
+    {
+      "name": "enableDoubleJump",
+      "type": "boolean",
+      "label": "Enable Double Jump",
+      "default": true
+    },
+    {
+      "name": "startingLives",
+      "type": "number",
+      "label": "Starting Lives",
+      "default": 15,
+      "min": 1,
+      "max": 20,
+      "step": 1
+    },
+    {
+      "name": "timeLimit",
+      "type": "number",
+      "label": "Level Time Limit (s)",
+      "default": 300,
+      "min": 60,
+      "max": 600,
+      "step": 30
+    },
+    {
+      "name": "titanDuration",
+      "type": "number",
+      "label": "Titan Mode Duration (s)",
+      "default": 18,
+      "min": 8,
+      "max": 40,
+      "step": 2
+    },
+    {
+      "name": "defaultMusicVolume",
+      "type": "number",
+      "label": "Default Music Volume",
+      "default": 0.4,
+      "min": 0,
+      "max": 1,
+      "step": 0.1
+    }
+  ],
+  "values": {
+    "playerSpeed": 220,
+    "dashSpeed": 360,
+    "jumpForce": 560,
+    "enableDoubleJump": true,
+    "startingLives": 15,
+    "timeLimit": 300,
+    "titanDuration": 18,
+    "defaultMusicVolume": 0.4
+  }
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Arcade Game</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Habilita el Playground SDK simulado localmente sin depender de la nube
+      window.__PLAYGROUND_PREVIEW__ = true;
+    </script>
+    <style>
+      * {
+        box-sizing: border-box;
+        -webkit-touch-callout: none;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        background-color: #0b0f19;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        overflow: hidden;
+      }
+      canvas {
+        touch-action: none;
+      }
+
+      /* Animación del icono de rotar celular */
+      @keyframes phoneRotate {
+        0%, 10% { transform: rotate(0deg); }
+        40%, 60% { transform: rotate(90deg); }
+        90%, 100% { transform: rotate(0deg); }
+      }
+      .animate-phone-rotate {
+        animation: phoneRotate 2.5s ease-in-out infinite;
+      }
+
+      /* Overlay de giro de pantalla en modo vertical */
+      #rotate-overlay {
+        display: none;
+      }
+      @media (orientation: portrait) {
+        #rotate-overlay {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- CONTENEDOR PRINCIPAL DEL JUEGO -->
+    <div id="root"></div>
+
+    <!-- OVERLAY EN MODO VERTICAL / PORTRAIT -->
+    <div
+      id="rotate-overlay"
+      class="fixed inset-0 z-[9998] bg-black/95 backdrop-blur-md flex-col items-center justify-center p-6 text-center text-white select-none">
+      <div class="w-20 h-20 mb-6 flex items-center justify-center bg-zinc-900 border-2 border-amber-500/80 rounded-3xl shadow-[0_0_30px_rgba(245,158,11,0.5)]">
+        <svg class="w-12 h-12 text-amber-400 animate-phone-rotate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="5" y="2" width="14" height="20" rx="3" stroke-width="2" />
+          <path d="M12 18h.01" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <h2 class="text-2xl font-black uppercase tracking-wider text-amber-400 mb-2">
+        GIRA TU CELULAR EN HORIZONTAL
+      </h2>
+      <p class="text-xs text-zinc-300 max-w-xs mb-6 font-mono">
+        Para disfrutar la pantalla completa y todos los controles táctiles.
+      </p>
+
+      <button
+        onclick="window.toggleFullScreenLandscape(event)"
+        class="px-6 py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 active:scale-95 text-black font-black uppercase tracking-widest text-sm rounded-2xl shadow-[0_0_25px_rgba(245,158,11,0.7)] border border-yellow-200 cursor-pointer animate-pulse">
+        ▶ FORZAR PANTALLA COMPLETA ◀
+      </button>
+
+      <span class="text-[10px] text-zinc-500 mt-4 font-mono block">
+        (Si no gira solo, activa el "Giro Automático" de tu teléfono)
+      </span>
+    </div>
+
+    <!-- SCRIPT DE PANTALLA COMPLETA Y BLOQUEO HORIZONTAL -->
+    <script>
+      window.toggleFullScreenLandscape = async function(e) {
+        if (e && e.stopPropagation) e.stopPropagation();
+
+        const doc = document.documentElement;
+        const isFullscreen = Boolean(
+          document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          document.mozFullScreenElement ||
+          document.msFullscreenElement
+        );
+
+        if (isFullscreen) {
+          // Salir de pantalla completa
+          try {
+            if (document.exitFullscreen) {
+              await document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+              await document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+              await document.mozCancelFullScreen();
+            }
+          } catch (err) {
+            console.warn('Error al salir de fullscreen:', err);
+          }
+        } else {
+          // Entrar a pantalla completa
+          try {
+            if (doc.requestFullscreen) {
+              await doc.requestFullscreen({ navigationUI: 'hide' });
+            } else if (doc.webkitRequestFullscreen) {
+              await doc.webkitRequestFullscreen();
+            } else if (doc.mozRequestFullScreen) {
+              await doc.mozRequestFullScreen();
+            }
+          } catch (err) {
+            console.warn('Fullscreen no permitido:', err);
+          }
+
+          // Intentar bloquear orientación horizontal si el navegador lo permite
+          try {
+            if (screen.orientation && screen.orientation.lock) {
+              await screen.orientation.lock('landscape').catch(() => {});
+            }
+          } catch (err) {
+            // Ignorar silenciosamente si no está soportado en este navegador
+          }
+        }
+
+        checkOrientation();
+      };
+
+      function checkOrientation() {
+        const overlay = document.getElementById('rotate-overlay');
+        if (!overlay) return;
+        // Si el ancho es mayor a la altura, estamos en horizontal
+        if (window.innerWidth >= window.innerHeight) {
+          overlay.style.setProperty('display', 'none', 'important');
+        } else {
+          overlay.style.setProperty('display', 'flex', 'important');
+        }
+      }
+
+      window.addEventListener('resize', checkOrientation);
+      window.addEventListener('orientationchange', checkOrientation);
+      document.addEventListener('fullscreenchange', checkOrientation);
+      document.addEventListener('webkitfullscreenchange', checkOrientation);
+      checkOrientation();
+    </script>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
