@@ -3190,9 +3190,10 @@ export default function App() {
 
     return () => {
       if (fallbackInterval) clearInterval(fallbackInterval);
-      if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
+      const narrationAudio = prologueAudioRef.current;
+      if (narrationAudio) {
+        narrationAudio.pause();
+        narrationAudio.currentTime = 0;
       }
     };
   }, [currentScene, storyPanelIndex, language, narrationMuted, sfxMuted]);
